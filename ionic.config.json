@@ -1,0 +1,7 @@
+{
+  "name": "aps7",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
