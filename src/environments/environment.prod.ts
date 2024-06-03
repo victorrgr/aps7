@@ -1,4 +1,5 @@
 export const environment = {
-  openaqToken: 'token',
+  apiUrl: 'https://api.waqi.info',
+  apiToken: 'token',
   production: true
 };

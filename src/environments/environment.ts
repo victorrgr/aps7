@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  openaqToken: 'token',
+  apiUrl: 'https://api.waqi.info',
+  apiToken: 'token',
   production: false
 };
 
