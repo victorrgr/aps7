@@ -3,27 +3,19 @@
     <ion-title>Region Search</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Region Search</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <form [formGroup]="form">
-    <ion-item>
-      <ion-input
-        label="Search"
-        labelPlacement="floating"
-        type="text"
-        formControlName="search"
-      ></ion-input>
-    </ion-item>
-    <ion-label *ngIf="filteredOptions.length === 0">
-      No results found
-    </ion-label>
-    <ion-list *ngIf="filteredOptions.length > 0">
+    <ion-list [inset]="true">
+      <ion-item>
+        <ion-input
+          label="Search"
+          labelPlacement="floating"
+          type="text"
+          formControlName="search"
+        ></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list [inset]="true" *ngIf="filteredOptions.length > 0">
       <ion-item
         *ngFor="let option of filteredOptions"
         (click)="selectOption(option)"

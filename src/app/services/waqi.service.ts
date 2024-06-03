@@ -16,4 +16,12 @@ export class WaqiService {
       },
     });
   }
+
+  getById(id: number) {
+    return this.http.get<any>(`${environment.apiUrl}/feed/@${id}/`, {
+      params: {
+        token: environment.apiToken,
+      },
+    });
+  }
 }

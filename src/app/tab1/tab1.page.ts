@@ -28,7 +28,14 @@ export class Tab1Page implements OnInit {
   }
 
   selectOption(option: any) {
-    console.log(option)
+    this.waqiService.getById(option.uid).subscribe({
+      next: (res) => {
+        console.log(res)
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   private _filter(value: string) {
