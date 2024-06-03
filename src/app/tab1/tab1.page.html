@@ -1,6 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Region Search</ion-title>
+    <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
@@ -15,6 +16,14 @@
         ></ion-input>
       </ion-item>
     </ion-list>
+
+    <ion-list [inset]="true" *ngIf="filteredOptions.length === 0">
+      <ion-item>
+        <ion-label> No results found </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <!-- TODO: Change this listing so that when clicking it has some feedback-->
     <ion-list [inset]="true" *ngIf="filteredOptions.length > 0">
       <ion-item
         *ngFor="let option of filteredOptions"

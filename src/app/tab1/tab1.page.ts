@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WaqiService } from '../services/waqi.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -9,10 +10,16 @@ import { debounceTime } from 'rxjs';
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page implements OnInit {
+  loading = false;
   form: FormGroup;
   filteredOptions: any[] = [];
 
-  constructor(private waqiService: WaqiService) {
+  constructor(
+    private waqiService: WaqiService,
+    // TODO: Possibly use this to go to the page in which there's more details of the
+    //  region
+    private navCtrl: NavController
+  ) {
     this.form = new FormGroup({
       search: new FormControl(''),
     });
@@ -28,17 +35,11 @@ export class Tab1Page implements OnInit {
   }
 
   selectOption(option: any) {
-    this.waqiService.getById(option.uid).subscribe({
-      next: (res) => {
-        console.log(res)
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
+    this.navCtrl.navigateForward(`/tabs/tab2/${option.uid}`);
   }
 
   private _filter(value: string) {
+    this.loading = true;
     this.waqiService.search(value).subscribe({
       next: (res) => {
         this.filteredOptions = res.data;
@@ -46,6 +47,9 @@ export class Tab1Page implements OnInit {
       error: (err) => {
         console.error(err);
       },
+      complete: () => {
+        this.loading = false;
+      }
     });
   }
 }
