@@ -1,17 +1,50 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+    <ion-progress-bar *ngIf="loading" type="indeterminate"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" *ngIf="!loading">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>City</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text>
+        <h2>{{ data.city.name }}</h2>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-text>
+        <h1>Air Quality Index</h1>
+      </ion-text>
+      <ion-text [ngStyle]="aqiStyle(index)" style="text-align: center;">
+        <div style="font-size: 96pt;">{{ data.aqi }}</div>
+      </ion-text>
+      <ion-card-title>{{ index.level }}</ion-card-title>
+    </ion-card-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-card-content>
+      {{ index.implications }}
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>OTHER DATA</ion-card-title>
+      <ion-text>
+        TEST
+      </ion-text>
+      <ion-card-title>OTHER DATA</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{ index.implications }}
+    </ion-card-content>
+  </ion-card>
 </ion-content>
