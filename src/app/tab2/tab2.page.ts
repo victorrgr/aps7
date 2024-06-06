@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WaqiService } from '../services/waqi.service';
 import { ActivatedRoute } from '@angular/router';
+import { WaqiService } from '../services/waqi.service';
+import { AqiResponse } from './model/aqi-response.model';
 
 @Component({
   selector: 'app-tab2',
@@ -10,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class Tab2Page implements OnInit {
   id: number = 0;
   loading: boolean = false;
-  data: any = {};
+  data: AqiResponse;
   index: any = {};
   indexTable = [
     {
@@ -93,13 +94,13 @@ export class Tab2Page implements OnInit {
     if (index) {
       return {
         'background-color': `#${index.color}`,
-        'color': index.textColor
+        color: index.textColor,
       };
     }
     return null;
   }
 
-  findIndex(data: any): any {
+  findIndex(data: AqiResponse): any {
     let index = this.indexTable.find((i) => {
       let start = i.range[0];
       let end = i.range[1];
@@ -108,12 +109,13 @@ export class Tab2Page implements OnInit {
       }
       return data.aqi >= start;
     });
-    return index || {
-      range: [-1, -1],
-      level: 'No Data',
-      color: '262626',
-      implications:
-        'No data was found about the region.',
-    }
+    return (
+      index || {
+        range: [-1, -1],
+        level: 'No Data',
+        color: '262626',
+        implications: 'No data was found about the region.',
+      }
+    );
   }
 }
