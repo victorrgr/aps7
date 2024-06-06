@@ -24,27 +24,64 @@
       <ion-text>
         <h1>Air Quality Index</h1>
       </ion-text>
-      <ion-text [ngStyle]="aqiStyle(index)" style="text-align: center;">
-        <div style="font-size: 96pt;">{{ data.aqi }}</div>
+      <ion-text [ngStyle]="aqiStyle(index)" style="text-align: center">
+        <div style="font-size: 96pt">{{ data.aqi }}</div>
       </ion-text>
-      <ion-card-title>{{ index.level }}</ion-card-title>
+      <ion-card-title style="margin: auto; margin-top: 5px"
+        >{{ index.level }}</ion-card-title
+      >
     </ion-card-header>
 
-    <ion-card-content>
-      {{ index.implications }}
-    </ion-card-content>
+    <ion-card-content> {{ index.implications }} </ion-card-content>
   </ion-card>
+
   <ion-card>
     <ion-card-header>
-      <ion-card-title>OTHER DATA</ion-card-title>
-      <ion-text>
-        TEST
-      </ion-text>
-      <ion-card-title>OTHER DATA</ion-card-title>
+      <ion-card-title>Measurement time information</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      {{ index.implications }}
+      <app-pie-chart #iAqi [iAqi]="data.iaqi"> </app-pie-chart>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Forecast Graphs</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-card-content *ngIf="data.forecast.daily.o3">
+        <app-bar-chart
+          #o3
+          [id]="'o3'"
+          [aqiForecastValue]="data.forecast.daily.o3"
+        ></app-bar-chart>
+      </ion-card-content>
+
+      <ion-card-content *ngIf="data.forecast.daily.pm25">
+        <app-bar-chart
+          #pm25
+          [id]="'pm2.5'"
+          [aqiForecastValue]="data.forecast.daily.pm25"
+        ></app-bar-chart>
+      </ion-card-content>
+
+      <ion-card-content *ngIf="data.forecast.daily.pm10">
+        <app-bar-chart
+          #pm25
+          [id]="'pm10'"
+          [aqiForecastValue]="data.forecast.daily.pm10"
+        ></app-bar-chart>
+      </ion-card-content>
+
+      <ion-card-content *ngIf="data.forecast.daily.uvi">
+        <app-bar-chart
+          #pm25
+          [id]="'pm10'"
+          [aqiForecastValue]="data.forecast.daily.uvi"
+        ></app-bar-chart>
+      </ion-card-content>
     </ion-card-content>
   </ion-card>
 </ion-content>
